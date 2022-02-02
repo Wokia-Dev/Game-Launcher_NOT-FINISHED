@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <RootNamespace>Game_Launcher</RootNamespace>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="Ressources\Images\Icons\Game.png" />
+      <None Remove="Ressources\Images\Icons\profile.png" />
+      <None Remove="Ressources\Images\Icons\search.png" />
+      <None Remove="Ressources\Images\Icons\settings.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="Ressources\Images\Icons\Game.png" />
+      <Resource Include="Ressources\Images\Icons\profile.png" />
+      <Resource Include="Ressources\Images\Icons\search.png" />
+      <Resource Include="Ressources\Images\Icons\settings.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="MVVM\Model\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="EntityFramework" Version="6.4.4" />
+    </ItemGroup>
+
+</Project>

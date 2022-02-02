@@ -1,0 +1,271 @@
+﻿<Window x:Class="Game_Launcher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Game_Launcher"
+        xmlns:viewModel="clr-namespace:Game_Launcher.MVVM.ViewModel"
+        mc:Ignorable="d"
+        Title="Game Launcher by Wokia" 
+        Height="825" Width="1420"
+        Background="#272537" 
+        Icon="/Ressources/Images/Icons/Game.png"
+        ResizeMode="CanMinimize"
+        WindowStyle="None"
+        Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="settings" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#00000000"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#00000000"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#00000000"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#00000000"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+    
+    <Grid ShowGridLines="False">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.ColumnSpan="2"
+                Background="#252525"
+                MouseDown="Border_MouseDown">
+
+            <Grid HorizontalAlignment="Stretch">
+                <Image Source="/Ressources/Images/Icons/Game.png"
+                       HorizontalAlignment="Left" VerticalAlignment="Center"
+                       Width="24" Height="24"
+                       Margin="10,0,0,0"/>
+                
+                <Label Content="Game Launcher by Wokia"
+                       Foreground="Gray"
+                       FontWeight="SemiBold" Margin="40,0,0,0"/>
+
+                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top"
+                            Orientation="Horizontal">
+
+                    <Button Width="23" Height="20"
+                            Content="__"
+                            Background="Transparent"
+                            Foreground="Gray"
+                            BorderThickness="0"
+                            FontWeight="Bold"
+                            Click="ButtonMinimize_Click"/>
+                    
+                    <Button Width="23" Height="20"
+                            Content="╳"
+                            Background="Transparent"
+                            Foreground="Gray"
+                            BorderThickness="0"
+                            FontWeight="Bold" Margin="0,0,5,0"
+                            Click="ButtonClose_Click"/>
+
+                </StackPanel>
+
+            </Grid>
+            
+        </Border>
+        
+        <Rectangle Grid.Column="0"
+                   Grid.Row="1"
+                   Fill="#FF38364A"
+                   Margin="0,0,0,0"/>
+        
+        <StackPanel Grid.Column="0"
+                    Grid.Row="1"
+                    Name="NavMenu_TopPannel" 
+                    Height="60" 
+                    VerticalAlignment="Top">
+            
+            <!-- Menu Button -->
+            <Button Style="{DynamicResource settings}" Background="#00000000" BorderBrush="#00000000" Foreground="#00000000" 
+                    Width="25" Height="25"
+                    HorizontalAlignment="Left"
+                    Margin="10,20,0,0"
+                    Name="settingsBtn"
+                    Click="settingsBtn_Click"
+                    Command="{Binding SettingViewCommand}">
+                <Image Source="/Ressources/Images/Icons/settings.png" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Button>
+
+            <Button Style="{DynamicResource settings}" Background="#00000000" BorderBrush="#00000000" Foreground="#00000000" 
+                    Width="25" Height="25"
+                    Margin="-12.5,-25,0,0"
+                    Name="profileBtn"
+                    Click="profileBtn_Click">
+                <Image Source="/Ressources/Images/Icons/profile.png" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Button>
+
+            <Button Style="{DynamicResource settings}" Background="#00000000" BorderBrush="#00000000" Foreground="#00000000" 
+                    Width="25" Height="25"
+                    Margin="0,-25,10,0"
+                    HorizontalAlignment="Right"
+                    Name="searchBtn"
+                    Click="searchBtn_Click">
+                <Image Source="/Ressources/Images/Icons/search.png" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Button>
+            <!-- end Menu Button-->
+            
+        </StackPanel>
+
+        <StackPanel Height="420"
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Name="NavMenu_Jeux" 
+                    Margin="0,110,0,90"
+                    VerticalAlignment="Top">
+
+            <TextBlock Margin="20,0,0,0"
+                       FontStyle="Normal" FontWeight="Bold" FontFamily="Cascadia Mono SemiBold" FontSize="13">
+                JEUX
+            </TextBlock>
+
+            <RadioButton Content="Récent"
+                         Height="50"
+                         Foreground="White"
+                         FontSize="14"
+                         Style="{StaticResource MenuButtonTheme}"
+                         Margin="0,10,0,0"
+                         IsChecked="True"
+                         Command="{Binding HomeViewCommand}"/>
+
+            <RadioButton Content="Bibliothèque"
+                         Height="50"
+                         Foreground="White"
+                         FontSize="14"
+                         Style="{StaticResource MenuButtonTheme}"
+                         Command="{Binding BibliotequeViewCommand}"/>
+
+            <RadioButton Content="Installé"
+                         Height="50"
+                         Foreground="White"
+                         FontSize="14"
+                         Style="{StaticResource MenuButtonTheme}"
+                         Command="{Binding InstallerViewCommand}"/>
+
+            <RadioButton Content="Téléchargement"
+                         Height="50"
+                         Foreground="White"
+                         FontSize="14"
+                         Style="{StaticResource MenuButtonTheme}"
+                         Command="{Binding TelechargementViewCommand}"/>
+
+            <TextBlock Margin="20,10,0,10"
+                       FontStyle="Normal" FontWeight="Bold" FontFamily="Cascadia Mono SemiBold" FontSize="13">
+                CHAT
+            </TextBlock>
+
+            <RadioButton Content="Général"
+                         Height="50"
+                         Foreground="White"
+                         FontSize="14"
+                         Style="{StaticResource MenuButtonTheme}"
+                         Command="{Binding ChatViewCommand}"/>
+
+        </StackPanel>
+
+        <StackPanel Height="150"
+                    Grid.Column="0" 
+                    Grid.Row="1"
+                    Name="NavMenu_Support" 
+                    Margin="0,0,0,0"
+                    VerticalAlignment="Bottom">
+
+            <TextBlock Margin="20,0,0,0"
+                       FontStyle="Normal" FontWeight="Bold" FontFamily="Cascadia Mono SemiBold" FontSize="13">
+                SUPPORT
+            </TextBlock>
+
+            <Button Content="Discord"
+                    Height="50"
+                    Foreground="White"
+                    FontSize="14"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Margin="50,10,0,0"
+                    HorizontalAlignment="Left"
+                    Style="{DynamicResource settings}"
+                    Name="DiscordBtn"
+                    Click="DiscordBtn_Click"/>
+
+
+            <Button Content="Rapport de Bug"
+                    Height="50"
+                    Foreground="White"
+                    FontSize="14"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Margin="50,10,0,0"
+                    HorizontalAlignment="Left"
+                    Style="{DynamicResource settings}"/>
+
+        </StackPanel>
+
+        <ContentControl
+            Grid.Column="1"
+            Grid.Row="1"
+            Margin="10,0,10,10"
+            Content="{Binding CurrentView}"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,42 @@
+﻿<Application x:Class="Game_Launcher.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Game_Launcher"
+             xmlns:viewModel="clr-namespace:Game_Launcher.MVVM.ViewModel"
+             xmlns:view="clr-namespace:Game_Launcher.MVVM.View"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="Theme/ScrollBarTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+                <view:HomeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:BibliotequeViewModel}">
+                <view:BibliotequeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:InstallerViewModel}">
+                <view:InstallerView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:TelechargementViewModel}">
+                <view:TelechargementView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ChatViewModel}">
+                <view:ChatView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:SettingViewModel}">
+                <view:SettingView/>
+            </DataTemplate>
+
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
