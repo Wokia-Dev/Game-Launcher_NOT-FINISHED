@@ -9,17 +9,44 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Ressources\Images\forza5.jpg" />
+      <None Remove="Ressources\Images\Icons\configuration.png" />
+      <None Remove="Ressources\Images\Icons\cpu.png" />
+      <None Remove="Ressources\Images\Icons\download.png" />
+      <None Remove="Ressources\Images\Icons\fullStar.png" />
       <None Remove="Ressources\Images\Icons\Game.png" />
+      <None Remove="Ressources\Images\Icons\goBack.png" />
+      <None Remove="Ressources\Images\Icons\gpu.png" />
+      <None Remove="Ressources\Images\Icons\guide.png" />
+      <None Remove="Ressources\Images\Icons\os.png" />
       <None Remove="Ressources\Images\Icons\profile.png" />
+      <None Remove="Ressources\Images\Icons\ram.png" />
       <None Remove="Ressources\Images\Icons\search.png" />
       <None Remove="Ressources\Images\Icons\settings.png" />
+      <None Remove="Ressources\Images\Icons\star.png" />
+      <None Remove="Ressources\Images\Waiting screen.gif" />
     </ItemGroup>
 
     <ItemGroup>
+      <SplashScreen Include="Ressources\Images\Waiting screen.gif" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="Ressources\Images\forza5.jpg" />
+      <Resource Include="Ressources\Images\Icons\configuration.png" />
+      <Resource Include="Ressources\Images\Icons\cpu.png" />
+      <Resource Include="Ressources\Images\Icons\download.png" />
+      <Resource Include="Ressources\Images\Icons\fullStar.png" />
       <Resource Include="Ressources\Images\Icons\Game.png" />
+      <Resource Include="Ressources\Images\Icons\goBack.png" />
+      <Resource Include="Ressources\Images\Icons\gpu.png" />
+      <Resource Include="Ressources\Images\Icons\guide.png" />
+      <Resource Include="Ressources\Images\Icons\os.png" />
       <Resource Include="Ressources\Images\Icons\profile.png" />
+      <Resource Include="Ressources\Images\Icons\ram.png" />
       <Resource Include="Ressources\Images\Icons\search.png" />
       <Resource Include="Ressources\Images\Icons\settings.png" />
+      <Resource Include="Ressources\Images\Icons\star.png" />
     </ItemGroup>
 
     <ItemGroup>
@@ -27,7 +54,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="EntityFramework" Version="6.4.4" />
+      <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.24.0" />
     </ItemGroup>
 
 </Project>

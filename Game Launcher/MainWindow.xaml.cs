@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
+using System.Net;
+using System.IO;
 
 namespace Game_Launcher
 {
@@ -23,50 +25,18 @@ namespace Game_Launcher
     /// </summary>
     public partial class MainWindow : Window
     {
-        //Minimize style
-        //-------------------------//
-        internal class ApiCodes
-        {
-            public const int SC_RESTORE = 0xF120;
-            public const int SC_MINIMIZE = 0xF020;
-            public const int WM_SYSCOMMAND = 0x0112;
-        }
-
-        private IntPtr hwnd;
-
-        [DllImport("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
-
-        private IntPtr WindowProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-        {
-            if (msg == ApiCodes.WM_SYSCOMMAND)
-            {
-                if (wParam.ToInt32() == ApiCodes.SC_MINIMIZE)
-                {
-                    WindowStyle = WindowStyle.SingleBorderWindow;
-                    WindowState = WindowState.Minimized;
-                    handled = true;
-                }
-                else if (wParam.ToInt32() == ApiCodes.SC_RESTORE)
-                {
-                    WindowState = WindowState.Normal;
-                    WindowStyle = WindowStyle.None;
-                    handled = true;
-                }
-            }
-            return IntPtr.Zero;
-        }
-        //-------------------------//
-
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Initialized(object sender, EventArgs e)
         {
-            hwnd = new WindowInteropHelper(this).Handle;
-            HwndSource.FromHwnd(hwnd).AddHook(WindowProc);
+            using (var client = new WebClient())
+            {
+                client.DownloadFile("http://localhost:3000/Games", "db.json");
+            }
+
         }
 
         private void settingsBtn_Click(object sender, RoutedEventArgs e)
@@ -103,13 +73,14 @@ namespace Game_Launcher
 
         private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
         {
-            SendMessage(hwnd, ApiCodes.WM_SYSCOMMAND, new IntPtr(ApiCodes.SC_MINIMIZE), IntPtr.Zero);
+            this.WindowState = WindowState.Minimized;
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
         }
+
 
     }
 }

@@ -12,7 +12,7 @@
         Icon="/Ressources/Images/Icons/Game.png"
         ResizeMode="CanMinimize"
         WindowStyle="None"
-        Loaded="Window_Loaded">
+        Initialized="Window_Initialized">
 
     <Window.Resources>
         <Style x:Key="FocusVisual">
@@ -264,7 +264,7 @@
         <ContentControl
             Grid.Column="1"
             Grid.Row="1"
-            Margin="10,0,10,10"
+            Margin="0,0,0,0"
             Content="{Binding CurrentView}"/>
 
     </Grid>

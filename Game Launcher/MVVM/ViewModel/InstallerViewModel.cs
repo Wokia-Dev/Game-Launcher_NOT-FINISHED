@@ -8,5 +8,6 @@ namespace Game_Launcher.MVVM.ViewModel
 {
     internal class InstallerViewModel
     {
+
     }
 }
